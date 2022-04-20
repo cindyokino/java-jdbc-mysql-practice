@@ -39,3 +39,6 @@ Clone the project before implementing each new feature will be helpful for a bet
     - executeUpdate()
     - Statement.RETURN_GENERATED_KEYS
     - getGeneratedKeys()
+
+# JDBC4
+- Program.java - Add logic to update data, update the column "salary" from "seller" table.
