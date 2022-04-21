@@ -58,6 +58,6 @@ Create mysql database connection with jdbc.
 - Transactions - The four key properties of a transaction: Atomicity, Consistency, Isolation and Durability.
 
 - Use of Java DBC API: 
-    - setAutoCommit(false)
-    - commit()
+    - setAutoCommit(false) - operations will not be confirmed automatically, will wait for an explicit confirmation.
+    - commit() - confirm the operations.
     - rollback()

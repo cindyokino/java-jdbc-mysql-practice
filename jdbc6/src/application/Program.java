@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import db.DB;
+import db.DbException;
 
 public class Program {
 	
@@ -14,6 +15,9 @@ public class Program {
 		Statement st = null;
 		try {
 			conn = DB.getConnection();
+			
+			//***** BEGIN transaction - bloc setAutoCommit(false) / commit() *****
+			conn.setAutoCommit(false); //operations will not be confirmed automatically, all operations will wait for an explicit confirmation.
 			
 			st = conn.createStatement();
 			
@@ -28,12 +32,20 @@ public class Program {
 			
 			int rows2 = st.executeUpdate("UPDATE seller SET BaseSalary = 3090 WHERE DepartmentId = 2");
 
+			conn.commit(); //confirm the operations.
+			//***** END transaction - bloc setAutoCommit(false) / commit() *****
+			
 			System.out.println("rows1 = " + rows1);
 			System.out.println("rows2 = " + rows2);
 			
 		}
 		catch (SQLException e) {
-			e.printStackTrace(); //this line only prints the stack trace
+			try {
+				conn.rollback(); //return database to the initial status, so it will not have the operations executed partially.
+				throw new DbException("Transaction rolled back! Caused by: " + e.getMessage()); //inform that the transaction was not completed.
+			} catch (SQLException e1) {
+				throw new DbException("Error trying to rollback! Caused by: " + e.getMessage());
+			} 
 		}
 		finally {
 			DB.closeStatement(st);
