@@ -37,7 +37,7 @@ Create mysql database connection with jdbc.
     - Simple insertion using preparedStatement.
     - Insertion using id recovery.
 
-- Use of JDBC API classes: 
+- Use of Java JDBC API: 
     - PreparedStatement
     - executeUpdate()
     - Statement.RETURN_GENERATED_KEYS
@@ -54,3 +54,10 @@ Create mysql database connection with jdbc.
     - Handle referential integrity exception: MySQLIntegrityConstraintViolationException (when trying to delete a department which is associated to any seller).
         - throw new DbIntegrityException(e.getMessage());
 
+# JDBC6
+- Transactions - The four key properties of a transaction: Atomicity, Consistency, Isolation and Durability.
+
+- Use of Java DBC API: 
+    - setAutoCommit(false)
+    - commit()
+    - rollback()
