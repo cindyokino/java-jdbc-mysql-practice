@@ -19,18 +19,21 @@ Clone the project before implementing each new feature will be helpful for a bet
     - Create the table `seller` containing the columns Id(int), Name(varchar60), Email(varchar100), BirthDate(datetime), BaseSalary(double), DepartmentId(int).
 
 # JDBC1
-- Create mysql database connection with jdbc.
+Create mysql database connection with jdbc.
+- DB.java - Class containing methods for the mysql database connection with jdbc.
+- DbException.java - My personalized exception of type RuntimeException (don't require any treatment, as the use of try-catch block).
+- Program.java - Use of DB.java class to open and close the database connection.
 
 # JDBC2
-- Program.java - Add logic to get data from "department" table.
-- DB.java - create static helper methods to close ResultSet and Statement.
+- Program.java - Add logic to GET data from "department" table.
+- DB.java - Create static helper methods to close ResultSet and Statement.
 
 - Use of JDBC API classes: 
     - Statement
     - ResultSet - first(), beforeFirst(), next(), absolute(int)
 
 # JDBC3
-- Program.java - Add logic to insert data to "seller" table.
+- Program.java - Add logic to INSERT data to "seller" table.
     - Simple insertion using preparedStatement.
     - Insertion using id recovery.
 
@@ -41,4 +44,13 @@ Clone the project before implementing each new feature will be helpful for a bet
     - getGeneratedKeys()
 
 # JDBC4
-- Program.java - Add logic to update data, update the column "salary" from "seller" table.
+- Program.java - Add logic to UPDATE data, update the column "BaseSalary" from "seller" table.
+
+# JDBC5
+- Program.java - Add logic to DELETE data, delete a department.
+
+- DbIntegrityException.java
+    - Create a personalized exception DbIntegrityException of type RuntimeException (don't require any treatment, as the use of try-catch block).
+    - Handle referential integrity exception: MySQLIntegrityConstraintViolationException (when trying to delete a department which is associated to any seller).
+        - throw new DbIntegrityException(e.getMessage());
+
